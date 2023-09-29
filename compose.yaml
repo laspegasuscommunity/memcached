@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  #Это конфигурация Docker Compose для запуска базы кэшей memcached.
+  memcached:
+    container_name: memcached
+    deploy:
+      restart_policy:
+        condition: always
+        delay: 5s
+    image: memcached:alpine
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "false"
+
+networks:
+  default:
+    external: true
+    name: $NETWORK
